@@ -1,17 +1,22 @@
 package com.paulomoreira.task.controller;
 
 import com.paulomoreira.task.domain.CreateTaskRequest;
+import com.paulomoreira.task.domain.UpdateTaskRequest;
 import com.paulomoreira.task.domain.dto.CreateTaskRequestDTO;
 import com.paulomoreira.task.domain.dto.TaskDTO;
+import com.paulomoreira.task.domain.dto.UpdateTaskRequestDTO;
 import com.paulomoreira.task.domain.entity.Task;
 import com.paulomoreira.task.mapper.TaskMapper;
 import com.paulomoreira.task.service.TaskService;
 import jakarta.validation.Valid;
+import org.hibernate.sql.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "/api/v1/tasks")
@@ -42,4 +47,14 @@ public class TaskController {
         return ResponseEntity.ok(tasksDTOs);
     }
 
+    @PutMapping(path = "/{taskId}")
+    public ResponseEntity<TaskDTO> updateTask(
+            @PathVariable UUID taskId,
+            @Valid @RequestBody UpdateTaskRequestDTO updateTaskRequestDTO
+    ) {
+        UpdateTaskRequest updateTaskRequest = taskMapper.fromDto(updateTaskRequestDTO);
+        Task task = taskService.updateTask(taskId, updateTaskRequest);
+        TaskDTO updatedTaskDTO = taskMapper.toDTO(task);
+        return ResponseEntity.ok(updatedTaskDTO);
+    }
 }

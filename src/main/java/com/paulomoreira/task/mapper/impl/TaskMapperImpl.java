@@ -1,8 +1,10 @@
 package com.paulomoreira.task.mapper.impl;
 
 import com.paulomoreira.task.domain.CreateTaskRequest;
+import com.paulomoreira.task.domain.UpdateTaskRequest;
 import com.paulomoreira.task.domain.dto.CreateTaskRequestDTO;
 import com.paulomoreira.task.domain.dto.TaskDTO;
+import com.paulomoreira.task.domain.dto.UpdateTaskRequestDTO;
 import com.paulomoreira.task.domain.entity.Task;
 import com.paulomoreira.task.mapper.TaskMapper;
 import org.springframework.stereotype.Component;
@@ -16,6 +18,17 @@ public class TaskMapperImpl implements TaskMapper {
                 dto.title(),
                 dto.description(),
                 dto.dueDate(),
+                dto.priority()
+        );
+    }
+
+    @Override
+    public UpdateTaskRequest fromDto(UpdateTaskRequestDTO dto) {
+        return new  UpdateTaskRequest(
+                dto.title(),
+                dto.description(),
+                dto.dueDate(),
+                dto.status(),
                 dto.priority()
         );
     }
