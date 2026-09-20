@@ -4,7 +4,7 @@ import com.paulomoreira.task.domain.entity.TaskPriority;
 
 import java.time.LocalDate;
 
-public record CreateTaskRecord(
+public record CreateTaskRequest(
         String title,
         String description,
         LocalDate dueDate,

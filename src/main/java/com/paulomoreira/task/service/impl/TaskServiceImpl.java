@@ -1,6 +1,6 @@
 package com.paulomoreira.task.service.impl;
 
-import com.paulomoreira.task.domain.CreateTaskRecord;
+import com.paulomoreira.task.domain.CreateTaskRequest;
 import com.paulomoreira.task.domain.entity.Task;
 import com.paulomoreira.task.domain.entity.TaskStatus;
 import com.paulomoreira.task.repository.TaskRepository;
@@ -19,7 +19,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task createTask(CreateTaskRecord request) {
+    public Task createTask(CreateTaskRequest request) {
         Instant now = Instant.now();
 
         Task task = new Task(
